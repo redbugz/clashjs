@@ -55,38 +55,4 @@ describe('Enzyme Mount', function () {
 	expect(app.find('.stats').at(0).text()).to.contain("1");
   });
 
-  it('Testing 1st player name is not empty', function () {
-      let app = mount(<Clash/>);
-   expect(app.find('.clash-player-name').at(0).text()).to.contain("");
-    });
-  it(' Testing 2nd player name is not empty', function () {
-        let app = mount(<Clash/>);
-     expect(app.find('.clash-player-name').at(1).text()).to.contain("") ;
-      });
-
-      it(' Testing 3rd player name is not empty', function () {
-        let app = mount(<Clash/>);
-        expect(app.find('.clash-player-name').at(2).text()).to.contain("") ;
-      });
-
-      it(' Testing 4th player name is not empty', function () {
-        let app = mount(<Clash/>);
-        expect(app.find('.clash-player-name').at(3).text()).to.contain("") ;
-      });
-
-      it(' Testing 5th player name is not empty', function () {
-        let app = mount(<Clash/>);
-        expect(app.find('.clash-player-name').at(4).text()).to.contain("") ;
-      });
-
-      it(' Testing 6th player name is not empty', function () {
-        let app = mount(<Clash/>);
-        expect(app.find('.clash-player-name').at(5).text()).to.contain("") ;
-      });
-
-      it(' Testing 7th player name is not empty', function () {
-        let app = mount(<Clash/>);
-        expect(app.find('.clash-player-name').at(6).text()).to.contain("") ;
-      });
-
 });

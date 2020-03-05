@@ -31,3 +31,25 @@ describe('Enzyme Shallow', function () {
     expect(app.find("height").length).to.equal(0);
   });
 });
+
+describe('Enzyme Render to test tiles size', function () {
+    it('Testing  Initial Grid size', function () {
+        let app = shallow(<Tiles/>);
+     expect(app.find('gridSize').length).to.lessThan(1);
+     // console.log(app.find('.div').at(0));
+      });
+      it('Testing  Initial Tile size', function () {
+          let app = shallow(<Tiles/>);
+       expect(app.find('tileSize').length).to.lessThan(1);
+       // console.log(app.find('.div').at(0));
+        });
+
+        it('Testing  Tile render', function () {
+            let app = shallow(<Tiles/>);
+         expect(app.find('tileRender').length).to.lessThan(1);
+         // console.log(app.find('.div').at(0));
+          });
+
+});
+
+

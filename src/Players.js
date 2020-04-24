@@ -36,4 +36,5 @@ module.exports = {
   yuno4: require('./players/yuno.js'),
   xmontoya4: require('./players/xmontoya.js'),
   margeux4: require('./players/margeux.js'),
+  // hamza: require ('./players/hamzaplay.js')
 };

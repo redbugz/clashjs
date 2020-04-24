@@ -24,7 +24,6 @@ module.exports.streak = {
   killingSpree: new Audio('static/sounds/streak/killing-spree.mp3'),
   dominating:  new Audio('static/sounds/streak/dominating.mp3'),
   rampage: new Audio('static/sounds/streak/rampage.mp3'),
-  godLike:  new Audio('static/sounds/streak/god-like.mp3'),
   ownage:  new Audio('static/sounds/streak/ownage.mp3')
 };
 

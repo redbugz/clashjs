@@ -197,12 +197,8 @@ const MAX_SPEED = 50;
         setTimeout(fx.streak.rampage.play(), 300);
         spreeMessage = killer.getName() + " is on a rampage of kills!";
         break;
-      case 6:
-        setTimeout(fx.streak.godLike.play(), 300);
-        spreeMessage = killer.getName() + " is Godlike!";
-        break;
       default:
-        spreeMessage = `Somebody please stop ${killer.getName()}!`;
+        spreeMessage = `Who is going to stop ${killer.getName()}?!?`;
         setTimeout(fx.streak.ownage.play(), 300);
     }
     if (Math.random() > 0.5) kills.push({ date: new Date(), text: spreeMessage });

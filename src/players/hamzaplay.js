@@ -177,7 +177,7 @@ var kills = 0;
 var HamzaPlayer = {
   info: {
     name: 'Hamza',
-    style: 6
+    stylex: 6
   },
   ai: function(player, enemies, map) {
     if (player.ammo) return hunter(player, enemies, map);

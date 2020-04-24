@@ -30,3 +30,18 @@ module.exports.streak = {
 module.exports.music = {
   theme0:  new Audio('static/sounds/music/flight.ogg')
 };
+
+module.exports.soundsOff = true
+
+module.exports.playSound = async sound => {
+  if (this.soundsOff) {
+    console.log('sounds off, skipping', sound.src)
+    return
+  }
+  try {
+    await sound.play()
+    console.log('played sound', sound.src)
+  } catch(err) {
+    console.error('error playing sound', err, sound.src)
+  }
+}

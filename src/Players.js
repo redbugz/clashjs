@@ -8,7 +8,7 @@ module.exports = {
   yuno: require('./players/yuno.js'),
   xmontoya: require('./players/xmontoya.js'),
   margeux: require('./players/margeux.js'),
-  hamza: require ('./players/hamzaplay.js'),
+  // hamza: require ('./players/hamzaplay.js'),
   codingpains2: require('./players/codingpains.js'),
   manuelmhtr2: require('./players/manuelmhtr.js'),
   ericku2: require('./players/ericku.js'),

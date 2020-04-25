@@ -18,7 +18,7 @@
         ai: (playerState, enemiesStates, gameEnvironment) => {
             var directionToTarget,
                 /**
-                 * Devuelve la direcci�n del amo mas cercano en base a la posici�n actual de la
+                 * Devuelve la dirección del amo mas cercano en base a la posición actual de la
                  * nave
                  * @returns {*}
                  */
@@ -41,7 +41,7 @@
                     return ammoMin;
                 },
                 /**
-                 * Devuelve n�mero de enemigos vivos
+                 * Devuelve número de enemigos vivos
                  * @returns {number}
                  */
                 getCountEnemiesAlive = () => {
@@ -93,7 +93,7 @@
                 // Guardo referencia de la posicion a la que me dirigi anteriormente
                 oldBestAmo = toPosition;
 
-                // Si ya se movio, cambio mi direcci�n
+                // Si ya se movio, cambio mi dirección
                 if (directionToTarget !== playerState.direction) {
                     return directionToTarget;
                 }

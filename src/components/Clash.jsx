@@ -63,7 +63,7 @@ class Clash extends React.Component {
   }
 
   handleToggleSounds() {
-    // TODO
+    fx.soundsOff ? fx.enableSounds() : fx.disableSounds()
   }
 
   newGame() {

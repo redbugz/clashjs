@@ -33,6 +33,9 @@ module.exports.music = {
 
 module.exports.soundsOff = true
 
+module.exports.enableSounds = () => this.soundsOff = false
+module.exports.disableSounds = () => this.soundsOff = true
+
 module.exports.playSound = async sound => {
   if (this.soundsOff) {
     console.log('sounds off, skipping', sound.src)

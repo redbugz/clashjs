@@ -63,7 +63,11 @@ class Clash extends React.Component {
   }
 
   handleToggleSounds() {
-    fx.soundsOff ? fx.enableSounds() : fx.disableSounds()
+    fx.soundsOn ? fx.disableSounds() : fx.enableSounds()
+  }
+
+  handleToggleMusic() {
+    fx.musicOn ? fx.stopMusic() : fx.playMusic()
   }
 
   newGame() {
@@ -186,20 +190,20 @@ class Clash extends React.Component {
     let spreeMessage = "";
     let kills = this.state.kills;
     if (killsStack.length === 1) {
-      fx.playSound(fx.streak.firstBlood);
+      setTimeout(() => fx.playSound(fx.streak.firstBlood), 150);
     }
 
     switch (killed.length) {
       case 2:
-        fx.playSound(fx.streak.doubleKill);
+        setTimeout(() => fx.playSound(fx.streak.doubleKill), 200);
         multiKill = killer.getName() + " got a double kill!";
         break;
       case 3:
-        fx.playSound(fx.streak.tripleKill);
+        setTimeout(() => fx.playSound(fx.streak.tripleKill), 200);
         multiKill = killer.getName() + " got a Triple Kill!";
         break;
       case 4:
-        fx.playSound(fx.streak.monsterKill);
+        setTimeout(() => fx.playSound(fx.streak.monsterKill), 200);
         multiKill = killer.getName() + " is a MONSTER KILLER!";
         break;
     }
@@ -210,19 +214,19 @@ class Clash extends React.Component {
 
     switch (streakCount + Math.floor(Math.random() * 3)) {
       case 3:
-        fx.playSound(fx.streak.killingSpree);
+        setTimeout(() => fx.playSound(fx.streak.killingSpree), 400);
         spreeMessage = killer.getName() + " is on a killing spree!";
         break;
       case 4:
-        fx.playSound(fx.streak.dominating);
+        setTimeout(() => fx.playSound(fx.streak.dominating), 400);
         spreeMessage = killer.getName() + " is dominating!";
         break;
       case 5:
-        fx.playSound(fx.streak.rampage);
+        setTimeout(() => fx.playSound(fx.streak.rampage), 400);
         spreeMessage = killer.getName() + " is on a rampage of kills!";
         break;
       default:
-        fx.playSound(fx.streak.ownage);
+        setTimeout(() => fx.playSound(fx.streak.ownage), 400);
         spreeMessage = `Can anyone stop ${killer.getName()}?!?`;
     }
     if (Math.random() > 0.5)
@@ -303,6 +307,10 @@ class Clash extends React.Component {
           </button>
           <button onClick={this.handleToggleSounds.bind(this)}>
             Toggle Sounds
+          </button>
+          <br/>
+          <button onClick={this.handleToggleMusic.bind(this)}>
+            Toggle Music
           </button>
         </div>
       </div>

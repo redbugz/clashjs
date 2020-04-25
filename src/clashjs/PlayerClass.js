@@ -20,11 +20,6 @@ class PlayerClass {
     return this._playerInfo.name;
   }
 
-  playExplosion() {
-    var i = Math.round(Math.random() * 10) % 3;
-    fx.playSound(fx.explosions["explode" + i]);
-  }
-
   execute(playerState, enemiesStates, gameEnvironment) {
     try {
       const action = this._playerAI(playerState, enemiesStates, gameEnvironment);

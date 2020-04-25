@@ -186,20 +186,20 @@ class Clash extends React.Component {
     let spreeMessage = "";
     let kills = this.state.kills;
     if (killsStack.length === 1) {
-      setTimeout(fx.streak.firstBlood.play(), 50);
+      fx.playSound(fx.streak.firstBlood);
     }
 
     switch (killed.length) {
       case 2:
-        setTimeout(fx.streak.doubleKill.play(), 100);
+        fx.playSound(fx.streak.doubleKill);
         multiKill = killer.getName() + " got a double kill!";
         break;
       case 3:
-        setTimeout(fx.streak.tripleKill.play(), 100);
+        fx.playSound(fx.streak.tripleKill);
         multiKill = killer.getName() + " got a Triple Kill!";
         break;
       case 4:
-        setTimeout(fx.streak.monsterKill.play(), 100);
+        fx.playSound(fx.streak.monsterKill);
         multiKill = killer.getName() + " is a MONSTER KILLER!";
         break;
     }
@@ -210,24 +210,20 @@ class Clash extends React.Component {
 
     switch (streakCount + Math.floor(Math.random() * 3)) {
       case 3:
-        setTimeout(fx.streak.killingSpree.play(), 300);
+        fx.playSound(fx.streak.killingSpree);
         spreeMessage = killer.getName() + " is on a killing spree!";
         break;
       case 4:
-        setTimeout(fx.streak.dominating.play(), 300);
+        fx.playSound(fx.streak.dominating);
         spreeMessage = killer.getName() + " is dominating!";
         break;
       case 5:
-        setTimeout(fx.streak.rampage.play(), 300);
+        fx.playSound(fx.streak.rampage);
         spreeMessage = killer.getName() + " is on a rampage of kills!";
         break;
-      case 6:
-        setTimeout(fx.streak.godLike.play(), 300);
-        spreeMessage = killer.getName() + " is Godlike!";
-        break;
       default:
-        spreeMessage = `Somebody please stop ${killer.getName()}!`;
-        setTimeout(fx.streak.ownage.play(), 300);
+        fx.playSound(fx.streak.ownage);
+        spreeMessage = `Can anyone stop ${killer.getName()}?!?`;
     }
     if (Math.random() > 0.5)
       kills.push({ date: new Date(), text: spreeMessage });

@@ -55,7 +55,7 @@ class ClashJS {
     this._playerStates = this._playerInstances.map(playerInstance => {
       let gridSize = this._gameEnvironment.gridSize;
       return {
-        style: playerInstance.getInfo().style || _.random(111),
+        style: playerInstance.getInfo().style || _.random(110),
         position: [Math.floor(Math.random() * gridSize), Math.floor(Math.random() * gridSize)],
         direction: DIRECTIONS[Math.floor(Math.random() * 4)],
         ammo: 0,

@@ -141,7 +141,7 @@
     }
 
     .player-dead td {
-      color: #55555;
+      color: #999;
     }
 
     td.player-name {
@@ -169,6 +169,8 @@
       position: fixed;
       top: 0;
       right: 0;
+      bottom: 0;
+      overflow-y: scroll;
     }
 
     .stats-title {
@@ -197,14 +199,15 @@
       animation: shotKeyFrame 0.3s;
     }
 
-    .debugger {
+    .debug-panel {
       background: rgba(0, 0, 0, 0.5);
       line-height: 1.4;
       padding: 1rem;
       font-size: 0.8rem;
       position: fixed;
-      top: 50%;
+      top: 100px;
       left: 0;
+      bottom: 0;
       overflow-y: scroll;
     }
 
@@ -263,14 +266,14 @@
     -->
 
 
-  <div class="instructions">
+  <!-- <div class="instructions">
     <b style="font-weight: 700">CLASHJS</b>
     <div>Javascript AI battle game.</div>
     <div>
       Learn how to play
       <a target="_blank" href="https://github.com/javierbyte/clashjs#game-definitions">here</a>.
     </div>
-  </div>
+  </div> -->
 
 </body>
 

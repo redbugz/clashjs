@@ -294,7 +294,7 @@ class Clash extends React.Component {
           stats={gameStats}
         />
         {true && (
-          <pre className="debugger">{JSON.stringify(playerStates, 0, 2)}</pre>
+          <pre className="debug-panel">{JSON.stringify({speed:this.state.speed,...this.state, playerStates}, 0, 2)}</pre>
         )}
 
         <div className="settings-panel">

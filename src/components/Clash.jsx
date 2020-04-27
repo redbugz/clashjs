@@ -15,8 +15,8 @@ var playerArray = _.shuffle(_.map(playerObjects, (el) => el));
 
 var killsStack = [];
 
-const DEFAULT_SPEED = 100;
-const MAX_SPEED = 50;
+const DEFAULT_SPEED = 0;
+const MAX_SPEED = 0;
 
 class Clash extends React.Component {
   constructor(props) {
@@ -140,8 +140,20 @@ class Clash extends React.Component {
         shoots: newShoots,
       });
     }
-    if (evt === "WIN") return this.newGame();
-    if (evt === "DRAW") return this.newGame();
+    if (evt === "WIN") {
+      console.log('@WIN')
+      this.setState({
+        kills: [{ date: new Date(), text: 'Wins' }]
+      })
+      return this.newGame();
+    }
+    if (evt === "DRAW") {
+      console.log('@DRAW')
+      this.setState({
+        kills: [{ date: new Date(), text: 'Stalemate :(' }]
+      })
+      return this.newGame();
+    }
     if (evt === "KILL") return this._handleKill(data);
     if (evt === "END") return this.endGame();
   }

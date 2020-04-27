@@ -11,7 +11,7 @@ import Notifications from "./Notifications.jsx";
 import ClashJS from "../clashjs/ClashCore.js";
 
 import playerObjects from "../Players.js";
-var playerArray = _.shuffle(_.map(playerObjects, (el) => el));
+var playerArray = _.shuffle(_.map(playerObjects, (el) => el.default ? el.default : el));
 
 var killsStack = [];
 

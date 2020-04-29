@@ -5,8 +5,10 @@ var randombot = {
     name: "random",
   },
   ai: function (playerState, enemiesStates, gameEnvironment) {
-    console.log("Player State", playerState);
-    console.log("Game Environment", gameEnvironment);
+    if (utils.isOnAsteroid(playerState.position, gameEnvironment.asteroids)) {
+      console.log('&&& random avoided asteroid', gameEnvironment.asteroids, playerState)
+      return 'move'
+    }
     return utils.randomMove();
   },
 };

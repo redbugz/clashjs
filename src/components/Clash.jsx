@@ -3,6 +3,7 @@ import _ from "lodash";
 import fx from "./../lib/sound-effects";
 import Tiles from "./Tiles.jsx";
 import Ammos from "./Ammos.jsx";
+import Asteroids from "./Asteroids.jsx";
 import Players from "./Players.jsx";
 import Stats from "./Stats.jsx";
 import Shoots from "./Shoots.jsx";
@@ -17,9 +18,9 @@ var playerArray = _.shuffle(_.map(playerObjects, (el) => el));
 
 var killsStack = [];
 
-const DEFAULT_SPEED = 100;
-// const DEFAULT_SPEED = 0;
-const MAX_SPEED = 50;
+// const DEFAULT_SPEED = 100;
+const DEFAULT_SPEED = 0;
+const MAX_SPEED = 0;
 
 class Clash extends React.Component {
   constructor(props) {
@@ -38,7 +39,7 @@ class Clash extends React.Component {
     this.state = {
       running: false,
       showDebug: false,
-      sounds: true,
+      sounds: false,
       clashjs: window.ClashInstance.getState(),
       shoots: [],
       speed: DEFAULT_SPEED,
@@ -46,7 +47,7 @@ class Clash extends React.Component {
       currentGameIndex: 1,
       finished: false,
     };
-    fx.enableSounds();
+    fx.disableSounds();
   }
 
   componentDidMount() {
@@ -167,7 +168,23 @@ class Clash extends React.Component {
     if (evt === "WIN") return this.newGame();
     if (evt === "DRAW") return this.newGame();
     if (evt === "KILL") return this._handleKill(data);
+    if (evt === "DESTROY") return this._handleDestroy(data);
     if (evt === "END") return this.endGame();
+  }
+
+  _handleDestroy({player}) {
+    console.log('*** handleDestroy', player)
+    let notification = [
+      'An Asteroid',
+      "destroyed",
+      player.name,
+    ].join(" ");
+
+    const {kills} = this.state
+    kills.push({ date: new Date(), text: notification });
+    this.setState({
+      kills,
+    });
   }
 
   _handleKill(data) {
@@ -313,6 +330,10 @@ class Clash extends React.Component {
         <Ammos
           gridSize={gameEnvironment.gridSize}
           ammoPosition={gameEnvironment.ammoPosition}
+        />
+        <Asteroids
+          gridSize={gameEnvironment.gridSize}
+          asteroids={gameEnvironment.asteroids}
         />
         <Players
           gridSize={gameEnvironment.gridSize}

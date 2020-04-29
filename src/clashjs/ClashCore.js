@@ -6,6 +6,7 @@ import executeMovementHelper from "./executeMovementHelper.js";
 var DIRECTIONS = ["north", "east", "south", "west"];
 
 const SUDDEN_DEATH_TURN = 100;
+const asteroidsOn = true;
 
 class ClashJS {
   constructor(playerDefinitionArray, currentStats, evtCallback) {
@@ -64,6 +65,8 @@ class ClashJS {
         direction: DIRECTIONS[Math.floor(Math.random() * 4)],
         ammo: 0,
         isAlive: true,
+        id: playerInstance.getId(),
+        name: playerInstance.getName()
       };
     });
 
@@ -104,18 +107,18 @@ class ClashJS {
   }
 
   _createAsteroids() {
-    this._gameEnvironment.asteroids = [];
-
-    // Roughly 5% of all spaces
     const numAsteroids = Math.floor(
-      Math.pow(this._gameEnvironment.gridSize, 2) * 0.05
+      Math.pow(this._gameEnvironment.gridSize, 2) * 0.03
     );
 
     for (let i = 0; i < numAsteroids; i++) {
-      this._gameEnvironment.asteroids.push(this._randomPosition());
+      this._gameEnvironment.asteroids.push({
+        position: this._randomPosition(),
+        detonateIn: Math.floor(Math.random() * (8 - 3)) + 3
+      });
     }
 
-    console.log("Incoming asteroids", this._gameEnvironment.asteroids);
+    console.log("*** Incoming asteroids", this._gameEnvironment.asteroids);
   }
 
   getState() {
@@ -167,9 +170,47 @@ class ClashJS {
     this._currentPlayer =
       (this._currentPlayer + 1) % this._playerInstances.length;
 
+    if (this._currentPlayer === 0) {
+      console.log('*** New Loop', JSON.stringify(this._gameEnvironment.asteroids))
+      // decrement all asteriod timers
+
+      this._gameEnvironment.asteroids.forEach((asteroid, index, array) => {
+        asteroid.detonateIn--
+        if (asteroid.detonateIn <= 0) {
+          // blow the thing up
+          console.log('*** detonating asteroid', asteroid)
+          this._playerStates.forEach(player => {
+            if (player.isAlive && asteroid.position[0] === player.position[0] && asteroid.position[1] === player.position[1]) {
+              console.log('&&& asteroid killed player', player.name)
+              // debugger;
+              this._handleCoreAction('DESTROY', { player })
+            }
+          })
+        }
+      })
+      // clear out detonated asteroids
+      this._gameEnvironment.asteroids = this._gameEnvironment.asteroids.filter(asteroid => asteroid.detonateIn > 0)
+      console.log('*** asteroids after detonate', JSON.stringify(this._gameEnvironment.asteroids))
+      const survivors = _.filter(this._playerStates, player => player.isAlive);
+      if (!survivors.length) {
+        this._handleCoreAction("DRAW");
+        this._evtCallback("DRAW");
+      }
+
+      if (survivors.length === 1) {
+        console.log('survivor', survivors[0])
+        this._handleCoreAction("WIN", {
+          winner: { getId: () => survivors[0].id }
+        });
+        this._evtCallback("WIN", {
+          winner: { getId: () => survivors[0].id }
+        });
+      }
+    }
+
     if (
       this._gameEnvironment.ammoPosition.length <
-        this._playerStates.length / 1.2 &&
+      this._playerStates.length / 1.2 &&
       Math.random() > 0.92
     ) {
       this._createAmmo();
@@ -179,7 +220,7 @@ class ClashJS {
       this._createAmmo();
     }
 
-    if (Math.random() > 0.7) {
+    if (asteroidsOn && Math.random() > 0.95) {
       this._createAsteroids();
     }
 
@@ -187,6 +228,17 @@ class ClashJS {
   }
 
   _handleCoreAction(action, data) {
+    if (action === 'DESTROY') {
+      console.log('*** core action DESTROY', data)
+      const { player } = data
+      player.isAlive = false
+      let stats = this._gameStats[player.id];
+      stats.deaths++
+
+      this._alivePlayerCount--;
+      this._suddenDeathCount = 0;
+      this._evtCallback(action, data)
+    }
     if (action === "KILL") {
       let { killer, killed } = data;
       this._gameStats[killer.getId()].kills++;

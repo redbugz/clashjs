@@ -21,7 +21,7 @@ class ClashJS {
     };
     this._alivePlayerCount = 0;
     this._suddenDeathCount = 0;
-    this._playerInstances = playerDefinitionArray.map(playerDefinition => {
+    this._playerInstances = playerDefinitionArray.map((playerDefinition) => {
       let player = new PlayerClass(playerDefinition);
       this._gameStats[player.getId()] = {
         name: player.getName(),
@@ -29,7 +29,7 @@ class ClashJS {
         kills: 0,
         kdr: 0,
         wins: 0,
-        winrate: 0
+        winrate: 0,
       };
       return player;
     });
@@ -46,20 +46,24 @@ class ClashJS {
   setupGame() {
     this._gameEnvironment = {
       gridSize: 13,
-      ammoPosition: []
+      ammoPosition: [],
+      asteroids: [],
     };
     this._rounds++;
     this._suddenDeathCount = 0;
     this._playerInstances = _.shuffle(this._playerInstances);
     this._alivePlayerCount = this._playerInstances.length;
-    this._playerStates = this._playerInstances.map(playerInstance => {
+    this._playerStates = this._playerInstances.map((playerInstance) => {
       let gridSize = this._gameEnvironment.gridSize;
       return {
         style: playerInstance.getInfo().style || _.random(110),
-        position: [Math.floor(Math.random() * gridSize), Math.floor(Math.random() * gridSize)],
+        position: [
+          Math.floor(Math.random() * gridSize),
+          Math.floor(Math.random() * gridSize),
+        ],
         direction: DIRECTIONS[Math.floor(Math.random() * 4)],
         ammo: 0,
-        isAlive: true
+        isAlive: true,
       };
     });
 
@@ -68,17 +72,20 @@ class ClashJS {
   }
 
   _createAmmo() {
-    if (this._gameEnvironment.ammoPosition.length === Math.pow(this._gameEnvironment.gridSize, 2)) {
-      console.log('Out of places to create ammo, skipping ...')
-      return
+    if (
+      this._gameEnvironment.ammoPosition.length ===
+      Math.pow(this._gameEnvironment.gridSize, 2)
+    ) {
+      console.log("Out of places to create ammo, skipping ...");
+      return;
     }
     var newAmmoPosition = [
       Math.floor(Math.random() * this._gameEnvironment.gridSize),
-      Math.floor(Math.random() * this._gameEnvironment.gridSize)
+      Math.floor(Math.random() * this._gameEnvironment.gridSize),
     ];
 
     if (
-      this._gameEnvironment.ammoPosition.some(el => {
+      this._gameEnvironment.ammoPosition.some((el) => {
         return el[0] === newAmmoPosition[0] && el[1] === newAmmoPosition[1];
       })
     ) {
@@ -89,6 +96,28 @@ class ClashJS {
     this._gameEnvironment.ammoPosition.push(newAmmoPosition);
   }
 
+  _randomPosition() {
+    return [
+      Math.floor(Math.random() * this._gameEnvironment.gridSize),
+      Math.floor(Math.random() * this._gameEnvironment.gridSize),
+    ];
+  }
+
+  _createAsteroids() {
+    this._gameEnvironment.asteroids = [];
+
+    // Roughly 5% of all spaces
+    const numAsteroids = Math.floor(
+      Math.pow(this._gameEnvironment.gridSize, 2) * 0.05
+    );
+
+    for (let i = 0; i < numAsteroids; i++) {
+      this._gameEnvironment.asteroids.push(this._randomPosition());
+    }
+
+    console.log("Incoming asteroids", this._gameEnvironment.asteroids);
+  }
+
   getState() {
     return {
       gameEnvironment: this._gameEnvironment,
@@ -96,13 +125,16 @@ class ClashJS {
       rounds: this._rounds,
       totalRounds: this._totalRounds,
       playerStates: this._playerStates,
-      playerInstances: this._playerInstances
+      playerInstances: this._playerInstances,
     };
   }
 
   nextPly() {
-    console.log('_suddenDeathCount', this._suddenDeathCount)
-    if (this._suddenDeathCount > SUDDEN_DEATH_TURN * this._getAlivePlayerCount()) {
+    // console.log("_suddenDeathCount", this._suddenDeathCount);
+    if (
+      this._suddenDeathCount >
+      SUDDEN_DEATH_TURN * this._getAlivePlayerCount()
+    ) {
       this._evtCallback("DRAW");
       this._handleCoreAction("DRAW");
     }
@@ -113,7 +145,7 @@ class ClashJS {
     }
 
     if (this._getAlivePlayerCount() < 5) {
-      this._suddenDeathCount+= 1/this._getAlivePlayerCount();
+      this._suddenDeathCount += 1 / this._getAlivePlayerCount();
     }
 
     var otherPlayers = clonedStates.filter((currentEnemyFilter, index) => {
@@ -132,14 +164,23 @@ class ClashJS {
       );
     }
 
-    this._currentPlayer = (this._currentPlayer + 1) % this._playerInstances.length;
+    this._currentPlayer =
+      (this._currentPlayer + 1) % this._playerInstances.length;
 
-    if (this._gameEnvironment.ammoPosition.length < this._playerStates.length / 1.2 && Math.random() > 0.92) {
+    if (
+      this._gameEnvironment.ammoPosition.length <
+        this._playerStates.length / 1.2 &&
+      Math.random() > 0.92
+    ) {
       this._createAmmo();
     }
 
     if (Math.random() > 0.98) {
       this._createAmmo();
+    }
+
+    if (Math.random() > 0.7) {
+      this._createAsteroids();
     }
 
     return this.getState();
@@ -149,7 +190,7 @@ class ClashJS {
     if (action === "KILL") {
       let { killer, killed } = data;
       this._gameStats[killer.getId()].kills++;
-      _.forEach(this._playerInstances, player => {
+      _.forEach(this._playerInstances, (player) => {
         let stats = this._gameStats[player.getId()];
         if (killed.indexOf(player) > -1) {
           this._alivePlayerCount--;
@@ -193,7 +234,7 @@ class ClashJS {
       playerInstances: this._playerInstances,
       gameEnvironment: this._gameEnvironment,
       evtCallback: this._evtCallback,
-      coreCallback: this._handleCoreAction.bind(this)
+      coreCallback: this._handleCoreAction.bind(this),
     });
   }
 }

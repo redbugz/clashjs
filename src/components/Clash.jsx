@@ -18,6 +18,7 @@ var playerArray = _.shuffle(_.map(playerObjects, (el) => el));
 var killsStack = [];
 
 const DEFAULT_SPEED = 100;
+// const DEFAULT_SPEED = 0;
 const MAX_SPEED = 50;
 
 class Clash extends React.Component {

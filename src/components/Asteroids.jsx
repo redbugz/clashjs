@@ -12,7 +12,7 @@ class Asteroids extends React.Component {
       return (
         <div
           key={index}
-          className="clash-asteroid"
+          className={`clash-asteroid-${asteroid.style}`}
           style={{
             top: tileSize * asteroid.position[0] + "vmin",
             left: tileSize * asteroid.position[1] + "vmin",

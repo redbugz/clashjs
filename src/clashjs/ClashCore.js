@@ -114,7 +114,8 @@ class ClashJS {
     for (let i = 0; i < numAsteroids; i++) {
       this._gameEnvironment.asteroids.push({
         position: this._randomPosition(),
-        detonateIn: Math.floor(Math.random() * (8 - 3)) + 3
+        detonateIn: Math.floor(Math.random() * (8 - 3)) + 3,
+        style: _.random(9),
       });
     }
 

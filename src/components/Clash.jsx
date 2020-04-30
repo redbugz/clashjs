@@ -1,16 +1,18 @@
 import React from "react";
 import _ from "lodash";
-import fx from "./../lib/sound-effects";
+import { enableSounds, disableSounds, playSound, startMusic, stopMusic, streaks } from "./../lib/sound-effects";
 import Tiles from "./Tiles.jsx";
 import Ammos from "./Ammos.jsx";
 import Players from "./Players.jsx";
 import Stats from "./Stats.jsx";
 import Shoots from "./Shoots.jsx";
 import Notifications from "./Notifications.jsx";
+import ControlPanel from "./ControlPanel.jsx";
+import DebugPanel from "./DebugPanel.jsx";
 
 import ClashJS from "../clashjs/ClashCore.js";
 
-import playerObjects from "../Players.js";
+import * as playerObjects from "../Players.js";
 var playerArray = _.shuffle(_.map(playerObjects, (el) => el));
 
 var killsStack = [];
@@ -33,7 +35,9 @@ class Clash extends React.Component {
     // });
 
     this.state = {
-      startGame: false,
+      running: false,
+      showDebug: false,
+      sounds: true,
       clashjs: window.ClashInstance.getState(),
       shoots: [],
       speed: DEFAULT_SPEED,
@@ -41,33 +45,61 @@ class Clash extends React.Component {
       currentGameIndex: 1,
       finished: false,
     };
+    this.state.sounds ? enableSounds() : disableSounds()
   }
 
-  // componentDidMount() {
-  //   if (this.state.startGame) {
-  //     this.nextTurn();
-  //   }
-  // }
+  componentDidMount() {
+    window.addEventListener("keydown", (evt) => {
+      // console.log('keydown', evt.code, evt.key)
+      if (evt.key === "d") {
+        this.setState((prevState) => ({
+          showDebug: !prevState.showDebug,
+        }));
+      }
+      if (evt.code === "Space") {
+        this.handleToggleRunning()
+      }
+      if (evt.code === "KeyS") {
+        this.handleToggleSounds()
+      }
+    });
+  }
 
   handleClick() {
     this.setState({
       speed: Math.floor(this.state.speed * 0.9),
     });
-  }
-
-  handleStartGame() {
-    this.setState({
-      startGame: true,
-    });
     this.nextTurn();
   }
 
-  handleToggleSounds() {
-    fx.soundsOn ? fx.disableSounds() : fx.enableSounds()
+  handleToggleRunning() {
+    this.setState(
+      (prevState) => {
+        return {
+          running: !prevState.running,
+        };
+      },
+      () => {
+        if (this.state.running) this.nextTurn();
+      }
+    );
   }
 
-  handleToggleMusic() {
-    fx.musicOn ? fx.stopMusic() : fx.playMusic()
+  handleToggleSounds() {
+    this.setState(
+      (prevState) => ({
+        sounds: !prevState.sounds,
+      }),
+      () => {
+        if (this.state.sounds) {
+           enableSounds()
+           startMusic()
+         } else { 
+           disableSounds()
+           stopMusic()
+          }
+      }
+    );
   }
 
   newGame() {
@@ -96,7 +128,7 @@ class Clash extends React.Component {
   }
 
   nextTurn() {
-    if (this.state.finished) return;
+    if (!this.state.running || this.state.finished) return;
 
     var currentGameIndex = this.state.currentGameIndex;
 
@@ -190,21 +222,23 @@ class Clash extends React.Component {
     let spreeMessage = "";
     let kills = this.state.kills;
     if (killsStack.length === 1) {
-      setTimeout(() => fx.playSound(fx.streak.firstBlood), 150);
+      setTimeout(() => playSound(streaks.firstBlood), 150);
     }
 
     switch (killed.length) {
       case 2:
-        setTimeout(() => fx.playSound(fx.streak.doubleKill), 200);
+        setTimeout(() => playSound(streaks.doubleKill), 200);
         multiKill = killer.getName() + " got a double kill!";
         break;
       case 3:
-        setTimeout(() => fx.playSound(fx.streak.tripleKill), 200);
+        setTimeout(() => playSound(streaks.tripleKill), 200);
         multiKill = killer.getName() + " got a Triple Kill!";
         break;
       case 4:
-        setTimeout(() => fx.playSound(fx.streak.monsterKill), 200);
+        setTimeout(() => playSound(streaks.monsterKill), 200);
         multiKill = killer.getName() + " is a MONSTER KILLER!";
+        break;
+      default:
         break;
     }
     kills.push({
@@ -214,19 +248,19 @@ class Clash extends React.Component {
 
     switch (streakCount + Math.floor(Math.random() * 3)) {
       case 3:
-        setTimeout(() => fx.playSound(fx.streak.killingSpree), 400);
+        setTimeout(() => playSound(streaks.killingSpree), 400);
         spreeMessage = killer.getName() + " is on a killing spree!";
         break;
       case 4:
-        setTimeout(() => fx.playSound(fx.streak.dominating), 400);
+        setTimeout(() => playSound(streaks.dominating), 400);
         spreeMessage = killer.getName() + " is dominating!";
         break;
       case 5:
-        setTimeout(() => fx.playSound(fx.streak.rampage), 400);
+        setTimeout(() => playSound(streaks.rampage), 400);
         spreeMessage = killer.getName() + " is on a rampage of kills!";
         break;
       default:
-        setTimeout(() => fx.playSound(fx.streak.ownage), 400);
+        setTimeout(() => playSound(streaks.ownage), 400);
         spreeMessage = `Can anyone stop ${killer.getName()}?!?`;
     }
     if (Math.random() > 0.5)
@@ -237,8 +271,15 @@ class Clash extends React.Component {
   }
 
   render() {
-    var { clashjs, shoots, kills, finished, startGame } = this.state;
-
+    var {
+      clashjs,
+      shoots,
+      kills,
+      finished,
+      running,
+      sounds,
+      showDebug,
+    } = this.state;
     var {
       gameEnvironment,
       gameStats,
@@ -297,22 +338,14 @@ class Clash extends React.Component {
           playerStates={playerStates}
           stats={gameStats}
         />
-        {true && (
-          <pre className="debugger">{JSON.stringify(playerStates, 0, 2)}</pre>
-        )}
 
-        <div className="settings-panel">
-          <button onClick={this.handleStartGame.bind(this)}>
-            Start the Game!
-          </button>
-          <button onClick={this.handleToggleSounds.bind(this)}>
-            Toggle Sounds
-          </button>
-          <br/>
-          <button onClick={this.handleToggleMusic.bind(this)}>
-            Toggle Music
-          </button>
-        </div>
+        <ControlPanel
+          running={running}
+          sounds={sounds}
+          handleToggleRunning={this.handleToggleRunning.bind(this)}
+          handleToggleSounds={this.handleToggleSounds.bind(this)}
+        />
+        {showDebug && <DebugPanel playerStates={playerStates} />}
       </div>
     );
   }

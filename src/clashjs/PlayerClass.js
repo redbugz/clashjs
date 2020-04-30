@@ -1,4 +1,3 @@
-import fx from "./../lib/sound-effects";
 import generateId from "./../lib/string-tools";
 
 class PlayerClass {

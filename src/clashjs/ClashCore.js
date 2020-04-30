@@ -6,7 +6,7 @@ import executeMovementHelper from "./executeMovementHelper.js";
 var DIRECTIONS = ["north", "east", "south", "west"];
 
 const SUDDEN_DEATH_TURN = 100;
-const asteroidsOn = true;
+const ASTEROIDS = true;
 
 class ClashJS {
   constructor(playerDefinitionArray, currentStats, evtCallback) {
@@ -66,7 +66,7 @@ class ClashJS {
         ammo: 0,
         isAlive: true,
         id: playerInstance.getId(),
-        name: playerInstance.getName()
+        name: playerInstance.getName(),
       };
     });
 
@@ -108,15 +108,47 @@ class ClashJS {
 
   _createAsteroids() {
     const numAsteroids = Math.floor(
-      Math.pow(this._gameEnvironment.gridSize, 2) * 0.03
+      Math.pow(this._gameEnvironment.gridSize, 2) * 0.01
     );
 
     for (let i = 0; i < numAsteroids; i++) {
       this._gameEnvironment.asteroids.push({
         position: this._randomPosition(),
         detonateIn: Math.floor(Math.random() * (8 - 3)) + 3,
-        style: _.random(9),
+        style: 7,
       });
+    }
+
+    console.log("*** Incoming asteroids", this._gameEnvironment.asteroids);
+  }
+
+  _createAsteroids2() {
+    const alivePlayers = this._playerStates.filter((p) => p.isAlive);
+
+    if (alivePlayers.length > 3) {
+      const numAsteroids = Math.floor(
+        Math.pow(this._gameEnvironment.gridSize, 2) * 0.01
+      );
+
+      for (let i = 0; i < numAsteroids; i++) {
+        this._gameEnvironment.asteroids.push({
+          position: this._randomPosition(),
+          detonateIn: Math.floor(Math.random() * (8 - 3)) + 3,
+          style: 7,
+        });
+      }
+    } else {
+      // TARGET ASTEROIDS
+      for (let i = 0; i < alivePlayers.length; i++) {
+        const adjoiningPositions = this._findAdjoiningPositions(
+          alivePlayers[i].position
+        );
+        this._gameEnvironment.asteroids.push({
+          position: _.sample(adjoiningPositions),
+          detonateIn: Math.floor(Math.random() * (8 / -3)) + 3,
+          style: 7,
+        });
+      }
     }
 
     console.log("*** Incoming asteroids", this._gameEnvironment.asteroids);
@@ -172,46 +204,69 @@ class ClashJS {
       (this._currentPlayer + 1) % this._playerInstances.length;
 
     if (this._currentPlayer === 0) {
-      console.log('*** New Loop', JSON.stringify(this._gameEnvironment.asteroids))
-      // decrement all asteriod timers
+      console.log(
+        "*** New Loop",
+        JSON.stringify(this._gameEnvironment.asteroids)
+      );
+
+      if (ASTEROIDS && Math.random() < 0.33) {
+        this._createAsteroids2();
+      }
+
+      // decrement all asteroid timers
 
       this._gameEnvironment.asteroids.forEach((asteroid, index, array) => {
-        asteroid.detonateIn--
+        asteroid.detonateIn--;
         if (asteroid.detonateIn <= 0) {
+          asteroid.style = 3;
+
           // blow the thing up
-          console.log('*** detonating asteroid', asteroid)
-          this._playerStates.forEach(player => {
-            if (player.isAlive && asteroid.position[0] === player.position[0] && asteroid.position[1] === player.position[1]) {
-              console.log('&&& asteroid killed player', player.name)
+          console.log("*** detonating asteroid", asteroid);
+          this._playerStates.forEach((player) => {
+            if (
+              player.isAlive &&
+              asteroid.position[0] === player.position[0] &&
+              asteroid.position[1] === player.position[1]
+            ) {
+              console.log("&&& asteroid killed player", player.name);
               // debugger;
-              this._handleCoreAction('DESTROY', { player })
+              this._handleCoreAction("DESTROY", { player });
             }
-          })
+          });
         }
-      })
+      });
       // clear out detonated asteroids
-      this._gameEnvironment.asteroids = this._gameEnvironment.asteroids.filter(asteroid => asteroid.detonateIn > 0)
-      console.log('*** asteroids after detonate', JSON.stringify(this._gameEnvironment.asteroids))
-      const survivors = _.filter(this._playerStates, player => player.isAlive);
+      this._gameEnvironment.asteroids = this._gameEnvironment.asteroids.filter(
+        (asteroid) => asteroid.detonateIn > -5
+      );
+
+      console.log(
+        "*** asteroids after detonate",
+        JSON.stringify(this._gameEnvironment.asteroids)
+      );
+      const survivors = _.filter(
+        this._playerStates,
+        (player) => player.isAlive
+      );
       if (!survivors.length) {
         this._handleCoreAction("DRAW");
         this._evtCallback("DRAW");
       }
 
       if (survivors.length === 1) {
-        console.log('survivor', survivors[0])
+        console.log("survivor", survivors[0]);
         this._handleCoreAction("WIN", {
-          winner: { getId: () => survivors[0].id }
+          winner: { getId: () => survivors[0].id },
         });
         this._evtCallback("WIN", {
-          winner: { getId: () => survivors[0].id }
+          winner: { getId: () => survivors[0].id },
         });
       }
     }
 
     if (
       this._gameEnvironment.ammoPosition.length <
-      this._playerStates.length / 1.2 &&
+        this._playerStates.length / 1.2 &&
       Math.random() > 0.92
     ) {
       this._createAmmo();
@@ -221,24 +276,20 @@ class ClashJS {
       this._createAmmo();
     }
 
-    if (asteroidsOn && Math.random() > 0.95) {
-      this._createAsteroids();
-    }
-
     return this.getState();
   }
 
   _handleCoreAction(action, data) {
-    if (action === 'DESTROY') {
-      console.log('*** core action DESTROY', data)
-      const { player } = data
-      player.isAlive = false
+    if (action === "DESTROY") {
+      console.log("*** core action DESTROY", data);
+      const { player } = data;
+      player.isAlive = false;
       let stats = this._gameStats[player.id];
-      stats.deaths++
+      stats.deaths++;
 
       this._alivePlayerCount--;
       this._suddenDeathCount = 0;
-      this._evtCallback(action, data)
+      this._evtCallback(action, data);
     }
     if (action === "KILL") {
       let { killer, killed } = data;
@@ -289,6 +340,25 @@ class ClashJS {
       evtCallback: this._evtCallback,
       coreCallback: this._handleCoreAction.bind(this),
     });
+  }
+
+  _findAdjoiningPositions(position) {
+    const [x, y] = position;
+    const gridSize = this._gameEnvironment.gridSize;
+    const adjoining = [
+      [x - 1, y - 1],
+      [x - 1, y],
+      [x - 1, y + 1],
+      [x, y - 1],
+      [x, y],
+      [x, y + 1],
+      [x + 1, y - 1],
+      [x + 1, y],
+      [x + 1, y + 1],
+    ];
+    return adjoining.filter(
+      ([x, y]) => x >= 0 && x < gridSize && y >= 0 && y < gridSize
+    );
   }
 }
 

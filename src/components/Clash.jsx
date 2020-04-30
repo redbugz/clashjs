@@ -18,9 +18,9 @@ var playerArray = _.shuffle(_.map(playerObjects, (el) => el));
 
 var killsStack = [];
 
-// const DEFAULT_SPEED = 100;
-const DEFAULT_SPEED = 0;
-const MAX_SPEED = 0;
+const DEFAULT_SPEED = 100;
+// const DEFAULT_SPEED = 0;
+const MAX_SPEED = 100;
 
 class Clash extends React.Component {
   constructor(props) {
@@ -172,15 +172,11 @@ class Clash extends React.Component {
     if (evt === "END") return this.endGame();
   }
 
-  _handleDestroy({player}) {
-    console.log('*** handleDestroy', player)
-    let notification = [
-      'An Asteroid',
-      "destroyed",
-      player.name,
-    ].join(" ");
+  _handleDestroy({ player }) {
+    console.log("*** handleDestroy", player);
+    let notification = ["An Asteroid", "destroyed", player.name].join(" ");
 
-    const {kills} = this.state
+    const { kills } = this.state;
     kills.push({ date: new Date(), text: notification });
     this.setState({
       kills,

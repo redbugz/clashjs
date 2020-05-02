@@ -59,7 +59,7 @@ class ClashJS {
   setupGame() {
     // console.log('setupGame')
     this._gameEnvironment = {
-      gridSize: 13,
+      gridSize: 6,
       ammoPosition: [],
       asteroids: [],
     };
@@ -219,9 +219,8 @@ class ClashJS {
       this._gameStats[playerId].calcTime += (t1 - t0)
       this._gameStats[playerId].turns++
     }
-
-    this._currentPlayer =
-      (this._currentPlayer + 1) % this._playerInstances.length;
+    // console.log('setting to next player')
+    this._currentPlayer = (this._currentPlayer + 1) % this._playerInstances.length;
 
     if (this._currentPlayer === 0) {
       console.log(

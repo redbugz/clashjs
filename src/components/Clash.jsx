@@ -128,6 +128,24 @@ class Clash extends React.Component {
     );
   }
 
+  handleToggleMusic() {
+    // console.log('toggle music', this.state.music)
+    this.setState(
+      (prevState) => ({
+        music: !prevState.music,
+      }),
+      () => {
+        if (this.state.music) {
+          //  enableSounds()
+          startMusic()
+        } else {
+          //  disableSounds()
+          stopMusic()
+        }
+      }
+    );
+  }
+
   handleToggleStats() {
     this.setState(
       (prevState) => ({

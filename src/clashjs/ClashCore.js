@@ -57,6 +57,7 @@ class ClashJS {
   }
 
   setupGame() {
+    // console.log('setupGame')
     this._gameEnvironment = {
       gridSize: 13,
       ammoPosition: [],
@@ -84,6 +85,7 @@ class ClashJS {
 
     this._currentPlayer = 0;
     this._createAmmo();
+    // console.log('setupGame end', this.getState())
   }
 
   _createAmmo() {
@@ -178,11 +180,10 @@ class ClashJS {
   }
 
   nextPly() {
-    // console.log("_suddenDeathCount", this._suddenDeathCount);
-    if (
-      this._suddenDeathCount >
-      SUDDEN_DEATH_TURN * this._getAlivePlayerCount()
-    ) {
+    // console.log('nextply', this._currentPlayer, this.getState())
+
+    // this._suddenDeathCount > 0 && console.log('_suddenDeathCount', this._suddenDeathCount)
+    if (this._suddenDeathCount > SUDDEN_DEATH_TURN * this._getAlivePlayerCount()) {
       this._evtCallback("DRAW");
       this._handleCoreAction("DRAW");
     }
@@ -209,6 +210,7 @@ class ClashJS {
         _.cloneDeep(this._gameEnvironment, true)
       )
       const t1 = performance.now()
+      // console.log('player action', this._currentPlayer, playerAction)
       this._savePlayerAction(
         this._currentPlayer,
         playerAction
@@ -290,9 +292,9 @@ class ClashJS {
       this._createAmmo();
     }
 
-    if (Math.random() > 0.98) {
-      this._createAmmo();
-    }
+    // if (Math.random() > 0.98) {
+    //   this._createAmmo();
+    // }
 
     return this.getState();
   }

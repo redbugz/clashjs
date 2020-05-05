@@ -1,4 +1,6 @@
 const _ = require("lodash");
+const debug = require("debug");
+const log = debug("clashjs:helpers");
 
 const DIRECTIONS = {
   NORTH: "north",
@@ -43,7 +45,7 @@ const sameColumn = (pos1, pos2) => pos1[HORIZONTAL] === pos2[HORIZONTAL];
 const sameRow = (pos1, pos2) => pos1[VERTICAL] === pos2[VERTICAL];
 
 const isTargetVisible = (playerPosition, playerDirection, targetPosition) => {
-  console.log(playerPosition, playerDirection, targetPosition);
+  log(playerPosition, playerDirection, targetPosition);
   switch (playerDirection) {
     case DIRECTIONS.NORTH:
       return (
@@ -83,10 +85,10 @@ const enemiesInRange = (currentPlayerState, enemyStates) => {
 };
 
 const threats = function (player, enemies) {
-  if (!enemies.length) return false;
+  if (!enemies.length) return [];
   var { position } = player;
 
-  console.log("### position", player, position, enemies);
+  log("### position", player, position, enemies);
 
   return enemies.filter(
     (e) =>
@@ -117,7 +119,7 @@ const canMoveForward = function (player, game) {
 };
 
 const findClosestAmmo = function (player, game) {
-  console.log("### ammo, player, game", player, game);
+  log("### ammo, player, game", player, game);
   const sortedAmmo = game.ammoPosition
     .map((ammoPos) => ({
       position: ammoPos,

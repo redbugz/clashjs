@@ -25,6 +25,7 @@ const makeRandomMove = (includeShoot = false) => {
 };
 
 const calculateHeading = (startPos, endPos) => {
+  log("calculateHeading", startPos, endPos);
   const [startY, startX] = startPos;
   const [endY, endX] = endPos;
   const diffY = Math.abs(startY - endY);
@@ -45,7 +46,7 @@ const sameColumn = (pos1, pos2) => pos1[HORIZONTAL] === pos2[HORIZONTAL];
 const sameRow = (pos1, pos2) => pos1[VERTICAL] === pos2[VERTICAL];
 
 const isTargetVisible = (playerPosition, playerDirection, targetPosition) => {
-  log(playerPosition, playerDirection, targetPosition);
+  log("isTargetVisible", playerPosition, playerDirection, targetPosition);
   switch (playerDirection) {
     case DIRECTIONS.NORTH:
       return (

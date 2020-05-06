@@ -8,7 +8,7 @@ const log = debug("clashjs:core");
 var DIRECTIONS = ["north", "east", "south", "west"];
 
 // odd grids have checkerboard pattern, even grids get stripes
-const GRID_SIZE = 9;
+const GRID_SIZE = 7;
 const SUDDEN_DEATH_TURN = 100;
 let asteroidsOn = false;
 let cargoOn = false;

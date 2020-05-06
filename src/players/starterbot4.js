@@ -12,9 +12,8 @@ const log = debug("clashjs:starterbot");
 
 export default {
   info: {
-    name: "starterbot",
-    style: 20,
-    team: 1,
+    // name: "starterbot",
+    // style: 20,
   },
   ai: function (player, enemies, game) {
     log("Executing my AI function", player, enemies, game);

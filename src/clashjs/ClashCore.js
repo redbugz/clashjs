@@ -333,7 +333,7 @@ class ClashJS {
 
     if (
       this._gameEnvironment.ammoPosition.length <
-        this._playerStates.length / 1.2 &&
+      this._playerStates.length / 1.2 &&
       Math.random() > 0.92
     ) {
       this._createAmmo();

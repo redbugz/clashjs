@@ -200,7 +200,7 @@ class Clash extends React.Component {
   }
 
   handleChangeSpeed(newSpeed) {
-    // log('handleChangeSpeed', newSpeed)
+    log("handleChangeSpeed", newSpeed);
     this.setState({
       speedOverride: newSpeed,
     });

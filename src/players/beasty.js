@@ -1,100 +1,89 @@
 var a = [
-  "dnVsbmVyYWJpbGl0eQ==",
-  "bWF4",
-  "aW5mbw==",
-  "YmVhc3R5",
-  "ZGlzdGFuY2U=",
-  "bGVuZ3Ro",
-  "ZGlyZWN0aW9u",
-  "Y2FuS2lsbA==",
-  "bG9n",
-  "aW5kZXhPZg==",
-  "YXBwbHk=",
-  "dHJhY2U=",
-  "YW1tb1Bvc2l0aW9u",
-  "cHVzaA==",
-  "aXNBbGl2ZQ==",
-  "Zmxvb3I=",
-  "dmVydGljYWw=",
-  "aG9yaXpvbnRhbA==",
-  "dnVsbmVyYWJpbGl0eUxldmVs",
-  "bW92ZQ==",
-  "cmV0dXJuIChmdW5jdGlvbigpIA==",
-  "Z2V0RGlzdGFuY2U=",
-  "cmFuZG9t",
-  "d2VzdA==",
-  "ZGVidWc=",
-  "Y29uc29sZQ==",
-  "bWlu",
-  "cG9zaXRpb24=",
-  "bmVhcmVzdEFtbW8=",
-  "bmVhcmVzdEVuZW15",
-  "YXN0ZXJvaWRz",
-  "aXNPbkFzdGVyb2lk",
-  "YW1tbw==",
-  "ZWFzdA==",
-  "aXNWaXNpYmxl",
-  "YWJz",
-  "bmVhcmVzdEFtbW9EaXN0YW5jZQ==",
-  "bm9ydGg=",
-  "d2Fybg==",
-  "ZXhjZXB0aW9u",
-  "ZGlzdGFuY2VMZWZ0",
-  "ZmFzdEdldERpcmVjdGlvbg==",
-  "aW5zdGFuY2U=",
-  "c29tZQ==",
-  "Z3JpZFNpemU=",
   "c2hvb3Q=",
+  "Y2FuS2lsbA==",
+  "aW5zdGFuY2U=",
+  "bWF4",
+  "dnVsbmVyYWJpbGl0eUxldmVs",
+  "ZWFzdA==",
+  "ZGlyZWN0aW9u",
+  "bmVhcmVzdEFtbW8=",
+  "Z3JpZFNpemU=",
+  "aW5kZXhPZg==",
+  "YXN0ZXJvaWRz",
+  "YWJz",
+  "aXNBbGl2ZQ==",
+  "ZmFzdEdldERpcmVjdGlvbg==",
+  "cmFuZG9t",
   "Y2FuTW92ZQ==",
-  "e30uY29uc3RydWN0b3IoInJldHVybiB0aGlzIikoICk=",
-  "dGFibGU=",
-  "ZGV0b25hdGVJbg==",
+  "dmVydGljYWw=",
+  "ZGlzdGFuY2U=",
+  "YmVhc3R5",
+  "Zmxvb3I=",
   "Zm9yRWFjaA==",
   "c291dGg=",
+  "aG9yaXpvbnRhbA==",
+  "Z2V0RGlzdGFuY2U=",
+  "YW1tbw==",
+  "ZGlzdGFuY2VMZWZ0",
+  "bmVhcmVzdEFtbW9EaXN0YW5jZQ==",
+  "bm9ydGg=",
+  "bGVuZ3Ro",
+  "bW92ZQ==",
+  "c29tZQ==",
+  "cG9zaXRpb24=",
+  "d2VzdA==",
+  "bWlu",
+  "aXNWaXNpYmxl",
+  "dnVsbmVyYWJpbGl0eQ==",
+  "bmVhcmVzdEVuZW15",
+  "ZGV0b25hdGVJbg==",
 ];
-(function (b, c) {
-  var d = function (g) {
+(function (b, e) {
+  var f = function (g) {
     while (--g) {
       b["push"](b["shift"]());
     }
   };
-  d(++c);
-})(a, 0x166);
+  f(++e);
+})(a, 0xb3);
 var b = function (c, d) {
   c = c - 0x0;
   var e = a[c];
-  if (b["ZcHhLM"] === undefined) {
+  if (b["Rmgjvr"] === undefined) {
     (function () {
-      var g;
-      try {
-        var i = Function(
-          "return\x20(function()\x20" +
-            "{}.constructor(\x22return\x20this\x22)(\x20)" +
-            ");"
-        );
-        g = i();
-      } catch (j) {
-        g = window;
-      }
-      var h =
+      var g = function () {
+        var j;
+        try {
+          j = Function(
+            "return\x20(function()\x20" +
+              "{}.constructor(\x22return\x20this\x22)(\x20)" +
+              ");"
+          )();
+        } catch (k) {
+          j = window;
+        }
+        return j;
+      };
+      var h = g();
+      var i =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-      g["atob"] ||
-        (g["atob"] = function (k) {
-          var l = String(k)["replace"](/=+$/, "");
-          var m = "";
+      h["atob"] ||
+        (h["atob"] = function (j) {
+          var k = String(j)["replace"](/=+$/, "");
+          var l = "";
           for (
-            var n = 0x0, o, p, q = 0x0;
-            (p = l["charAt"](q++));
-            ~p && ((o = n % 0x4 ? o * 0x40 + p : p), n++ % 0x4)
-              ? (m += String["fromCharCode"](0xff & (o >> ((-0x2 * n) & 0x6))))
+            var m = 0x0, n, o, p = 0x0;
+            (o = k["charAt"](p++));
+            ~o && ((n = m % 0x4 ? n * 0x40 + o : o), m++ % 0x4)
+              ? (l += String["fromCharCode"](0xff & (n >> ((-0x2 * m) & 0x6))))
               : 0x0
           ) {
-            p = h["indexOf"](p);
+            o = i["indexOf"](o);
           }
-          return m;
+          return l;
         });
     })();
-    b["vQNMIA"] = function (g) {
+    b["KEDjXk"] = function (g) {
       var h = atob(g);
       var j = [];
       for (var k = 0x0, l = h["length"]; k < l; k++) {
@@ -102,136 +91,84 @@ var b = function (c, d) {
       }
       return decodeURIComponent(j);
     };
-    b["WXNJyM"] = {};
-    b["ZcHhLM"] = !![];
+    b["HSZogl"] = {};
+    b["Rmgjvr"] = !![];
   }
-  var f = b["WXNJyM"][c];
+  var f = b["HSZogl"][c];
   if (f === undefined) {
-    e = b["vQNMIA"](e);
-    b["WXNJyM"][c] = e;
+    e = b["KEDjXk"](e);
+    b["HSZogl"][c] = e;
   } else {
     e = f;
   }
   return e;
 };
-var d = (function () {
-  var e = !![];
-  return function (f, g) {
-    var h = e
-      ? function () {
-          if (g) {
-            var i = g[b("0x10")](f, arguments);
-            g = null;
-            return i;
-          }
-        }
-      : function () {};
-    e = ![];
-    return h;
-  };
-})();
-var c = d(this, function () {
-  var f = function () {};
-  var g;
-  try {
-    var h = Function(b("0x1a") + b("0x1") + ");");
-    g = h();
-  } catch (i) {
-    g = window;
-  }
-  if (!g[b("0x1f")]) {
-    g[b("0x1f")] = (function (j) {
-      var k = {};
-      k[b("0xe")] = j;
-      k[b("0x2c")] = j;
-      k[b("0x1e")] = j;
-      k[b("0x8")] = j;
-      k["error"] = j;
-      k[b("0x2d")] = j;
-      k[b("0x2")] = j;
-      k[b("0x11")] = j;
-      return k;
-    })(f);
-  } else {
-    g["console"][b("0xe")] = f;
-    g["console"][b("0x2c")] = f;
-    g[b("0x1f")][b("0x1e")] = f;
-    g[b("0x1f")][b("0x8")] = f;
-    g[b("0x1f")]["error"] = f;
-    g[b("0x1f")][b("0x2d")] = f;
-    g[b("0x1f")][b("0x2")] = f;
-    g[b("0x1f")][b("0x11")] = f;
-  }
-});
-c();
-var DIRECTIONS = [b("0x2b"), b("0x27"), b("0x5"), b("0x1d")];
-var movements = [b("0x2b"), b("0x27"), b("0x5"), b("0x1d"), b("0x33")];
+var DIRECTIONS = [b("0x0"), "east", b("0x20"), b("0x5")];
+var movements = [b("0x0"), b("0x10"), b("0x20"), b("0x5"), b("0xb")];
 var randomMove = () => {
-  return Math[b("0x1c")]() > 0.33
-    ? b("0x19")
-    : movements[Math[b("0x15")](Math[b("0x1c")]() * movements["length"])];
+  return Math[b("0x19")]() > 0.33
+    ? b("0x2")
+    : movements[Math["floor"](Math[b("0x19")]() * movements["length"])];
 };
 var safeRandomMove = () => {
-  return Math[b("0x1c")]() > 0.33
-    ? b("0x19")
-    : DIRECTIONS[Math[b("0x15")](Math[b("0x1c")]() * DIRECTIONS[b("0xb")])];
+  return Math[b("0x19")]() > 0.33
+    ? b("0x2")
+    : DIRECTIONS[Math[b("0x1e")](Math[b("0x19")]() * DIRECTIONS[b("0x1")])];
 };
-var turn = (e = [], f) => {
-  var g = DIRECTIONS[b("0xf")](e);
-  return DIRECTIONS[(g + f) % 0x4];
+var turn = (c = [], d) => {
+  var e = DIRECTIONS[b("0x14")](c);
+  return DIRECTIONS[(e + d) % 0x4];
 };
-var getDirection = (e = [], f = []) => {
-  e = e || [];
-  f = f || [];
-  var g = Math[b("0x29")](e[0x0] - f[0x0]);
-  var h = Math[b("0x29")](e[0x1] - f[0x1]);
-  if (g > h) {
-    return e[0x0] - f[0x0] > 0x0 ? "north" : "south";
+var getDirection = (c = [], d = []) => {
+  c = c || [];
+  d = d || [];
+  var e = Math[b("0x16")](c[0x0] - d[0x0]);
+  var f = Math[b("0x16")](c[0x1] - d[0x1]);
+  if (e > f) {
+    return c[0x0] - d[0x0] > 0x0 ? b("0x0") : b("0x20");
   }
-  return e[0x1] - f[0x1] > 0x0 ? b("0x1d") : b("0x27");
+  return c[0x1] - d[0x1] > 0x0 ? b("0x5") : b("0x10");
 };
-var getDistance = (e = [], f = []) => {
-  var g = Math[b("0x29")](e[0x0] - f[0x0]);
-  var h = Math[b("0x29")](e[0x1] - f[0x1]);
-  return h + g;
+var getDistance = (c = [], d = []) => {
+  var e = Math[b("0x16")](c[0x0] - d[0x0]);
+  var f = Math[b("0x16")](c[0x1] - d[0x1]);
+  return f + e;
 };
-var fastGetDirection = (e = [], f = []) => {
-  var g = Math[b("0x29")](e[0x0] - f[0x0]);
-  if (g) {
-    return e[0x0] - f[0x0] > 0x0 ? b("0x2b") : b("0x5");
+var fastGetDirection = (c = [], d = []) => {
+  var e = Math[b("0x16")](c[0x0] - d[0x0]);
+  if (e) {
+    return c[0x0] - d[0x0] > 0x0 ? b("0x0") : b("0x20");
   }
-  return e[0x1] - f[0x1] > 0x0 ? "west" : b("0x27");
+  return c[0x1] - d[0x1] > 0x0 ? b("0x5") : b("0x10");
 };
-var isVisible = (e = [], f = [], g = []) => {
-  switch (g) {
+var isVisible = (c = [], d = [], e = []) => {
+  switch (e) {
     case DIRECTIONS[0x0]:
-      return e[0x1] === f[0x1] && e[0x0] > f[0x0];
+      return c[0x1] === d[0x1] && c[0x0] > d[0x0];
     case DIRECTIONS[0x1]:
-      return e[0x0] === f[0x0] && e[0x1] < f[0x1];
+      return c[0x0] === d[0x0] && c[0x1] < d[0x1];
     case DIRECTIONS[0x2]:
-      return e[0x1] === f[0x1] && e[0x0] < f[0x0];
+      return c[0x1] === d[0x1] && c[0x0] < d[0x0];
     case DIRECTIONS[0x3]:
-      return e[0x0] === f[0x0] && e[0x1] > f[0x1];
+      return c[0x0] === d[0x0] && c[0x1] > d[0x1];
     default:
       break;
   }
 };
-var canKill = (e = {}, f = []) => {
-  return f["some"]((g) => {
-    return g[b("0x14")] && isVisible(e[b("0x21")], g[b("0x21")], e[b("0xc")]);
+var canKill = (c = {}, d = []) => {
+  return d[b("0x3")]((e) => {
+    return e[b("0x17")] && isVisible(c[b("0x4")], e[b("0x4")], c[b("0x11")]);
   });
 };
-var isOnAsteroid = (e, f) => {
-  const [g, h] = e;
-  return f[b("0x31")](
-    (i) => i[b("0x21")][0x0] === g && i[b("0x21")][0x1] === h
-  );
+var isOnAsteroid = (c, d) => {
+  const [e, f] = c;
+  return d[b("0x3")]((g) => g["position"][0x0] === e && g[b("0x4")][0x1] === f);
 };
-var inDangerOfAsteroid = (e, f) => {
-  const [g, h] = e;
-  return f[b("0x31")](
-    (i) =>
-      i[b("0x3")] < 0x2 && i[b("0x21")][0x0] === g && i[b("0x21")][0x1] === h
+var inDangerOfAsteroid = (c, d) => {
+  const [e, f] = c;
+  return d[b("0x3")](
+    (g) =>
+      g[b("0xa")] < 0x2 && g["position"][0x0] === e && g[b("0x4")][0x1] === f
   );
 };
 const utils = {
@@ -246,280 +183,280 @@ const utils = {
   isOnAsteroid: isOnAsteroid,
 };
 var ORIENTATION = {
-  north: b("0x16"),
-  east: b("0x17"),
-  south: b("0x16"),
-  west: b("0x17"),
+  north: b("0x1b"),
+  east: "horizontal",
+  south: b("0x1b"),
+  west: b("0x21"),
 };
 export default {
-  info: { name: b("0x9"), style: 0x3, team: 3 },
-  ai: function (e, f, g) {
-    var h;
-    var i = [];
-    var j = {
+  info: { name: b("0x1d"), style: 0x3 },
+  ai: function (c, d, e) {
+    var f;
+    var g = [];
+    var h = {
       vulnerabilityLevel: null,
       canKill: null,
       nearestAmmo: null,
       nearestEnemy: null,
       canMove: null,
     };
-    if (utils[b("0x25")](e[b("0x21")], g[b("0x24")])) {
-      return b("0x19");
+    if (utils["isOnAsteroid"](c[b("0x4")], e[b("0x15")])) {
+      return b("0x2");
     }
-    f[b("0x4")](function (y) {
-      if (y[b("0x14")] === !![]) {
-        y[b("0x2a")] = n(y[b("0x21")]);
-        i[b("0x13")](y);
+    d[b("0x1f")](function (w) {
+      if (w[b("0x17")] === !![]) {
+        w[b("0x25")] = l(w[b("0x4")]);
+        g["push"](w);
       }
     });
-    j["vulnerabilityLevel"] = k(e[b("0x21")]);
-    j[b("0xd")] = e["ammo"] > 0x0 && utils[b("0xd")](e, f);
-    j[b("0x22")] = m(e[b("0x21")]);
-    j[b("0x23")] = o(e[b("0x21")]);
-    j["canMove"] = s(e[b("0x21")], e[b("0xc")]);
-    function k(y) {
-      var z = 0x0;
-      i[b("0x4")](function (C) {
+    h[b("0xf")] = i(c[b("0x4")]);
+    h[b("0xc")] = c[b("0x23")] > 0x0 && utils[b("0xc")](c, d);
+    h[b("0x12")] = k(c[b("0x4")]);
+    h["nearestEnemy"] = m(c[b("0x4")]);
+    h[b("0x1a")] = q(c[b("0x4")], c["direction"]);
+    function i(w) {
+      var x = 0x0;
+      g["forEach"](function (A) {
         if (
-          utils[b("0x28")](C[b("0x21")], y, C[b("0xc")]) &&
-          C[b("0x26")] > 0x0
+          utils[b("0x7")](A[b("0x4")], w, A["direction"]) &&
+          A[b("0x23")] > 0x0
         ) {
-          z = Math[b("0x7")](z, 0x1);
+          x = Math["max"](x, 0x1);
         } else if (
-          l(C[b("0x21")], y) &&
-          (C[b("0x26")] > 0x0 || C[b("0x2a")] === 0x1)
+          j(A["position"], w) &&
+          (A[b("0x23")] > 0x0 || A["nearestAmmoDistance"] === 0x1)
         ) {
-          z = Math[b("0x7")](z, 0.5);
+          x = Math[b("0xe")](x, 0.5);
         }
       });
-      if (z === 0x0) {
-        var A = [y[0x0] + 0x1, y[0x1] + 0x1];
-        var B = [y[0x0] - 0x1, y[0x1] - 0x1];
-        i[b("0x4")](function (C) {
-          if (C["ammo"] > 0x0) {
-            if (l(C[b("0x21")], A) || l(C[b("0x21")], B)) {
-              z = Math[b("0x7")](z, 0.25);
+      if (x === 0x0) {
+        var y = [w[0x0] + 0x1, w[0x1] + 0x1];
+        var z = [w[0x0] - 0x1, w[0x1] - 0x1];
+        g["forEach"](function (A) {
+          if (A[b("0x23")] > 0x0) {
+            if (j(A[b("0x4")], y) || j(A[b("0x4")], z)) {
+              x = Math[b("0xe")](x, 0.25);
             }
           }
         });
       }
-      return z;
+      return x;
     }
-    function l(y, z) {
-      var A = ![];
-      A = A || (y[0x1] === z[0x1] && y[0x0] > z[0x0]);
-      A = A || (y[0x0] === z[0x0] && y[0x1] < z[0x1]);
-      A = A || (y[0x1] === z[0x1] && y[0x0] < z[0x0]);
-      A = A || (y[0x0] === z[0x0] && y[0x1] > z[0x1]);
-      return A;
+    function j(w, x) {
+      var y = ![];
+      y = y || (w[0x1] === x[0x1] && w[0x0] > x[0x0]);
+      y = y || (w[0x0] === x[0x0] && w[0x1] < x[0x1]);
+      y = y || (w[0x1] === x[0x1] && w[0x0] < x[0x0]);
+      y = y || (w[0x0] === x[0x0] && w[0x1] > x[0x1]);
+      return y;
     }
-    function m(y) {
-      var z = null;
-      var A = null;
-      g["ammoPosition"][b("0x4")](function (B) {
-        var C = utils["getDistance"](y, B);
-        if (A === null || C < A) {
-          A = C;
-          z = { position: B, distance: A };
+    function k(w) {
+      var x = null;
+      var y = null;
+      e["ammoPosition"][b("0x1f")](function (z) {
+        var A = utils[b("0x22")](w, z);
+        if (y === null || A < y) {
+          y = A;
+          x = { position: z, distance: y };
         }
       });
-      return z;
+      return x;
     }
-    function n(y) {
-      var z = null;
-      g[b("0x12")]["forEach"](function (A) {
-        var B = utils[b("0x1b")](y, A);
-        if (z === null || B < z) {
-          z = B;
+    function l(w) {
+      var x = null;
+      e["ammoPosition"][b("0x1f")](function (y) {
+        var z = utils[b("0x22")](w, y);
+        if (x === null || z < x) {
+          x = z;
         }
       });
-      return z;
+      return x;
     }
-    function o(y) {
-      var z = null;
-      var A = null;
-      i[b("0x4")](function (B) {
-        var C = p(y, B);
-        if (A === null || C < A) {
-          A = C;
-          z = { instance: B, distance: A };
+    function m(w) {
+      var x = null;
+      var y = null;
+      g[b("0x1f")](function (z) {
+        var A = n(w, z);
+        if (y === null || A < y) {
+          y = A;
+          x = { instance: z, distance: y };
         }
       });
-      return z;
+      return x;
     }
-    function p(y, z) {
-      var A = Math[b("0x29")](y[0x0] - z[b("0x21")][0x0]);
-      var B = Math[b("0x29")](y[0x1] - z[b("0x21")][0x1]);
-      return Math[b("0x20")](B, A);
+    function n(w, x) {
+      var y = Math["abs"](w[0x0] - x["position"][0x0]);
+      var z = Math["abs"](w[0x1] - x[b("0x4")][0x1]);
+      return Math[b("0x6")](z, y);
     }
-    function q() {
-      if (j[b("0x18")] === 0x1) {
-        var y = j[b("0x0")];
-        var z;
-        i[b("0x4")](function (A) {
+    function o() {
+      if (h[b("0xf")] === 0x1) {
+        var w = h[b("0x1a")];
+        var x;
+        g[b("0x1f")](function (y) {
           if (
-            A[b("0x26")] > 0x0 &&
-            utils["isVisible"](A[b("0x21")], e[b("0x21")], A[b("0xc")])
+            y[b("0x23")] > 0x0 &&
+            utils["isVisible"](y[b("0x4")], c[b("0x4")], y["direction"])
           ) {
-            z = A;
+            x = y;
           }
         });
-        if (z && ORIENTATION[z["direction"]] === ORIENTATION[e[b("0xc")]]) {
-          y = ![];
+        if (x && ORIENTATION[x[b("0x11")]] === ORIENTATION[c["direction"]]) {
+          w = ![];
         }
-        if (y) {
-          return "move";
-        } else if (z && e[b("0x26")] > 0x0) {
-          return v(z);
+        if (w) {
+          return b("0x2");
+        } else if (x && c[b("0x23")] > 0x0) {
+          return t(x);
         } else {
-          return r();
+          return p();
         }
       } else {
-        return r();
+        return p();
       }
     }
-    function r() {
-      var y = e[b("0xc")];
-      var z = j[b("0x18")];
-      var A = 0x0;
-      var B = [
+    function p() {
+      var w = c[b("0x11")];
+      var x = h["vulnerabilityLevel"];
+      var y = 0x0;
+      var z = [
         {
-          direction: b("0x2b"),
-          position: [e["position"][0x0] - 0x1, e[b("0x21")][0x1]],
+          direction: b("0x0"),
+          position: [c[b("0x4")][0x0] - 0x1, c[b("0x4")][0x1]],
         },
         {
-          direction: b("0x27"),
-          position: [e[b("0x21")][0x0], e[b("0x21")][0x1] + 0x1],
+          direction: b("0x10"),
+          position: [c[b("0x4")][0x0], c[b("0x4")][0x1] + 0x1],
+        },
+        {
+          direction: b("0x20"),
+          position: [c["position"][0x0] + 0x1, c[b("0x4")][0x1]],
         },
         {
           direction: b("0x5"),
-          position: [e[b("0x21")][0x0] + 0x1, e["position"][0x1]],
-        },
-        {
-          direction: "west",
-          position: [e[b("0x21")][0x0], e[b("0x21")][0x1] - 0x1],
+          position: [c[b("0x4")][0x0], c[b("0x4")][0x1] - 0x1],
         },
       ];
-      B["forEach"](function (D) {
-        D[b("0x6")] = k(D[b("0x21")]);
-        D[b("0x2e")] = C(D["direction"]);
-        D[b("0x0")] = s(e[b("0x21")], D["direction"]);
-        var E =
-          D["vulnerability"] < z || (D[b("0x6")] === z && D[b("0x2e")] > A);
-        if (D[b("0x0")] && E) {
-          y = D[b("0xc")];
-          z = D[b("0x6")];
-          A = D[b("0x2e")];
+      z[b("0x1f")](function (B) {
+        B[b("0x8")] = i(B[b("0x4")]);
+        B[b("0x24")] = A(B[b("0x11")]);
+        B[b("0x1a")] = q(c[b("0x4")], B[b("0x11")]);
+        var C =
+          B["vulnerability"] < x ||
+          (B[b("0x8")] === x && B["distanceLeft"] > y);
+        if (B[b("0x1a")] && C) {
+          w = B[b("0x11")];
+          x = B["vulnerability"];
+          y = B[b("0x24")];
         }
       });
-      if (y === e[b("0xc")]) {
-        return w();
+      if (w === c[b("0x11")]) {
+        return u();
       } else {
-        return y;
+        return w;
       }
-      function C(D) {
-        if (D === b("0x2b")) {
-          return e[b("0x21")][0x0];
-        } else if (D === b("0x27")) {
-          return g[b("0x32")] - e[b("0x21")][0x1];
-        } else if (D === b("0x5")) {
-          return g[b("0x32")] - e[b("0x21")][0x0];
-        } else if (D === b("0x1d")) {
-          return e["position"][0x1];
+      function A(B) {
+        if (B === b("0x0")) {
+          return c[b("0x4")][0x0];
+        } else if (B === b("0x10")) {
+          return e[b("0x13")] - c[b("0x4")][0x1];
+        } else if (B === b("0x20")) {
+          return e[b("0x13")] - c[b("0x4")][0x0];
+        } else if (B === b("0x5")) {
+          return c[b("0x4")][0x1];
         }
       }
     }
-    function s(y, z) {
-      if (z === b("0x2b")) {
-        return y[0x0] > 0x0;
-      } else if (z === "east") {
-        return y[0x1] < g["gridSize"];
-      } else if (z === "south") {
-        return y[0x0] < g[b("0x32")];
-      } else if (z === b("0x1d")) {
-        return y[0x1] > 0x0;
+    function q(w, x) {
+      if (x === b("0x0")) {
+        return w[0x0] > 0x0;
+      } else if (x === b("0x10")) {
+        return w[0x1] < e[b("0x13")];
+      } else if (x === b("0x20")) {
+        return w[0x0] < e[b("0x13")];
+      } else if (x === "west") {
+        return w[0x1] > 0x0;
       }
     }
-    function t() {
-      return "shoot";
+    function r() {
+      return b("0xb");
     }
-    function u() {
-      if (e["ammo"] === 0x0 && j[b("0x22")]) {
-        return x(j[b("0x22")][b("0x21")]);
-      } else if (e["ammo"] > 0x0 && j[b("0x23")]) {
-        if (j[b("0x22")] && j[b("0x22")][b("0xa")] < j[b("0x23")][b("0xa")]) {
-          return x(j[b("0x22")][b("0x21")]);
+    function s() {
+      if (c[b("0x23")] === 0x0 && h[b("0x12")]) {
+        return v(h[b("0x12")]["position"]);
+      } else if (c["ammo"] > 0x0 && h[b("0x9")]) {
+        if (h[b("0x12")] && h[b("0x12")][b("0x1c")] < h[b("0x9")][b("0x1c")]) {
+          return v(h[b("0x12")]["position"]);
         } else {
-          return v(j[b("0x23")][b("0x30")]);
+          return t(h[b("0x9")][b("0xd")]);
         }
       } else {
+        return p();
+      }
+    }
+    function t(w) {
+      if (utils["isVisible"](c[b("0x4")], w[b("0x4")], c[b("0x11")])) {
         return r();
-      }
-    }
-    function v(y) {
-      if (utils[b("0x28")](e[b("0x21")], y[b("0x21")], e[b("0xc")])) {
-        return t();
       } else {
-        var z = B();
-        var A = p(e[b("0x21")], y);
-        if (z === e[b("0xc")] && (A > 0x1 || y[b("0x26")] === 0x0)) {
-          return b("0x19");
+        var x = z();
+        var y = n(c[b("0x4")], w);
+        if (x === c[b("0x11")] && (y > 0x1 || w[b("0x23")] === 0x0)) {
+          return b("0x2");
         } else {
-          return z;
+          return x;
         }
       }
-      function B() {
-        var C = l(e["position"], y[b("0x21")]);
-        var D = ORIENTATION[y["direction"]];
-        if (C) {
-          return utils[b("0x2f")](e[b("0x21")], y[b("0x21")]);
+      function z() {
+        var A = j(c[b("0x4")], w[b("0x4")]);
+        var B = ORIENTATION[w[b("0x11")]];
+        if (A) {
+          return utils[b("0x18")](c[b("0x4")], w[b("0x4")]);
         } else {
-          if (D === b("0x16")) {
-            return y[b("0x21")][0x1] > e[b("0x21")][0x1]
-              ? b("0x27")
-              : b("0x1d");
+          if (B === b("0x1b")) {
+            return w[b("0x4")][0x1] > c[b("0x4")][0x1] ? b("0x10") : b("0x5");
           } else {
-            return y["position"][0x0] > e[b("0x21")][0x0]
-              ? b("0x5")
-              : b("0x2b");
+            return w[b("0x4")][0x0] > c[b("0x4")][0x0] ? b("0x20") : "north";
           }
         }
       }
     }
-    function w() {
-      var y;
-      var z;
-      if (e[b("0xc")] === b("0x2b")) {
-        y = [e[b("0x21")][0x0] - 0x1, e[b("0x21")][0x1]];
-      } else if (e[b("0xc")] === b("0x27")) {
-        y = [e[b("0x21")][0x0], e[b("0x21")][0x1] + 0x1];
-      } else if (e["direction"] === b("0x5")) {
-        y = [e["position"][0x0] + 0x1, e[b("0x21")][0x1]];
-      } else if (e[b("0xc")] === "west") {
-        y = [e["position"][0x0], e[b("0x21")][0x1] - 0x1];
+    function u() {
+      var w;
+      var x;
+      if (c[b("0x11")] === "north") {
+        w = [c[b("0x4")][0x0] - 0x1, c[b("0x4")][0x1]];
+      } else if (c[b("0x11")] === b("0x10")) {
+        w = [c["position"][0x0], c[b("0x4")][0x1] + 0x1];
+      } else if (c[b("0x11")] === b("0x20")) {
+        w = [c[b("0x4")][0x0] + 0x1, c[b("0x4")][0x1]];
+      } else if (c["direction"] === b("0x5")) {
+        w = [c[b("0x4")][0x0], c[b("0x4")][0x1] - 0x1];
       }
-      z = k(y);
-      if (z === 0x1) {
+      x = i(w);
+      if (x === 0x1) {
         return null;
       } else {
-        return b("0x19");
+        return b("0x2");
       }
     }
-    function x(y) {
-      var z = utils["fastGetDirection"](e["position"], y);
-      if (z === e[b("0xc")]) {
-        return w();
+    function v(w) {
+      var x = utils[b("0x18")](c[b("0x4")], w);
+      if (x === c[b("0x11")]) {
+        return u();
       } else {
-        return z;
+        return x;
       }
     }
-    if (j[b("0x18")] === 0x1 || (j[b("0x18")] >= 0.5 && j[b("0xd")] !== !![])) {
-      h = q();
-    } else if (j["canKill"] === !![]) {
-      h = t();
+    if (
+      h["vulnerabilityLevel"] === 0x1 ||
+      (h["vulnerabilityLevel"] >= 0.5 && h[b("0xc")] !== !![])
+    ) {
+      f = o();
+    } else if (h[b("0xc")] === !![]) {
+      f = r();
     } else {
-      h = u();
+      f = s();
     }
-    return h;
+    return f;
   },
 };

@@ -76,6 +76,7 @@ class Clash extends React.Component {
       clashjs: window.ClashInstance.getState(),
       shoots: [],
       speed: DEFAULT_SPEED,
+      speedOverride: undefined,
       notifications: [],
       currentGameIndex: 1,
       finished: false,
@@ -201,7 +202,7 @@ class Clash extends React.Component {
   handleChangeSpeed(newSpeed) {
     // log('handleChangeSpeed', newSpeed)
     this.setState({
-      speed: newSpeed,
+      speedOverride: newSpeed,
     });
   }
 
@@ -217,7 +218,7 @@ class Clash extends React.Component {
         // log('newGame setState state', state)
         return {
           clashjs: window.ClashInstance.getState(),
-          speed: DEFAULT_SPEED,
+          speed: this.state.speedOverride ?? DEFAULT_SPEED,
           notifications: state.notifications.concat({
             date: new Date(),
             text: "~~~ New Game ~~~",
@@ -265,13 +266,17 @@ class Clash extends React.Component {
 
       window.ClashInstance.nextPly();
 
+      const calculatedSpeed =
+        this.state.speed > MAX_SPEED
+          ? parseInt(this.state.speed * 0.99, 10)
+          : MAX_SPEED;
+
+      const speed = this.state.speedOverride ?? calculatedSpeed;
+
       this.setState(
         {
           clashjs: window.ClashInstance.getState(),
-          speed:
-            this.state.speed > MAX_SPEED
-              ? parseInt(this.state.speed * 0.99, 10)
-              : MAX_SPEED,
+          speed: speed,
         },
         this.nextTurn
       );

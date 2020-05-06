@@ -88,6 +88,7 @@ var clashCoreUtils = (data) => {
       ) {
         gameEnvironment.ammoPosition.splice(index, 1);
         currentPlayerState.ammo += 1;
+        coreCallback("AMMO", { player: currentPlayerState });
       }
     });
     // check if the player collected cargo
@@ -139,20 +140,6 @@ var clashCoreUtils = (data) => {
         killer: playerIndex,
         killed: kills,
       });
-
-      if (!survivors.length) {
-        coreCallback("DRAW");
-        evtCallback("DRAW");
-      }
-
-      if (survivors.length === 1) {
-        coreCallback("WIN", {
-          winner: playerInstances[playerIndex],
-        });
-        evtCallback("WIN", {
-          winner: playerInstances[playerIndex],
-        });
-      }
     }
   }
 

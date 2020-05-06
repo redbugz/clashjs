@@ -4,6 +4,7 @@ import PlayerClass from "./PlayerClass.js";
 import executeMovementHelper from "./executeMovementHelper.js";
 import debug from "debug";
 const log = debug("clashjs:core");
+const playerlog = debug("clashjs:bot:")
 
 var DIRECTIONS = ["north", "east", "south", "west"];
 
@@ -20,7 +21,7 @@ class ClashJS {
     // const clashjsTarget = class ClashJSTarget extends EventTarget {};
     // this.target = new clashjsTarget();
 
-    this._totalRounds = playerDefinitionArray.length * 2 + 6;
+    this._totalRounds = Math.min(playerDefinitionArray.length * 2 + 6, 20);
     this._rounds = 0;
     this._gameStats = currentStats || {};
     this._evtCallback = (msg, data) => {
@@ -33,11 +34,14 @@ class ClashJS {
       let player = new PlayerClass(playerDefinition);
       this._gameStats[player.getId()] = {
         name: player.getName(),
+        id: player.getId(),
+        team: player.getInfo().team,
         deaths: 0,
         kills: 0,
         kdr: 0,
         wins: 0,
         winrate: 0,
+        ammo: 0,
         cargo: 0,
         turns: 0,
         calcTime: 0,
@@ -257,7 +261,7 @@ class ClashJS {
         _.cloneDeep(this._gameEnvironment, true)
       );
       const t1 = performance.now();
-      console.log(
+      playerlog(
         "player action",
         this._currentPlayer,
         this._playerStates[this._currentPlayer].name,
@@ -326,7 +330,7 @@ class ClashJS {
           winner: { getId: () => survivors[0].id },
         });
         this._evtCallback("WIN", {
-          winner: { getId: () => survivors[0].id },
+          winner: survivors[0],
         });
       }
     }
@@ -353,6 +357,12 @@ class ClashJS {
       const { player, cargo } = data;
       let stats = this._gameStats[player.id];
       stats.cargo += cargo.value;
+    }
+    if (action === "AMMO") {
+      log("*** core action AMMO", data);
+      const { player } = data;
+      let stats = this._gameStats[player.id];
+      stats.ammo++;
     }
     if (action === "DESTROY") {
       log("*** core action DESTROY", data);

@@ -24,6 +24,7 @@ export default function StatsModal({ open, onClose, rounds,
   gameState,
 }) {
   stats = _.map(stats, playerStats => playerStats);
+  stats = _.sortBy(stats, playerStats => playerStats.ammo * -1);
   stats = _.sortBy(stats, playerStats => playerStats.kills * -1);
   stats = _.sortBy(stats, playerStats => playerStats.wins * -1);
   const duration = ((gameState.endTime || Date.now()) - gameState.startTime) / 1000
@@ -37,14 +38,13 @@ export default function StatsModal({ open, onClose, rounds,
           <thead>
             <tr>
               <th>
-                Round {rounds}/{total}
+                {total} Rounds
               </th>
               <th>Wins</th>
               <th>Rate</th>
               <th>Kills</th>
               <th>Deaths</th>
-              <th>K/D Rate</th>
-              <th>Cargo</th>
+              <th>K/D Ratio</th>
               <th>Ammo</th>
               <th>Turns</th>
               <th>Moves</th>
@@ -60,13 +60,12 @@ export default function StatsModal({ open, onClose, rounds,
               // console.log('playerStats', playerStats)
               return (
                 <tr key={playerStats.name}>
-                  <td className='player-name'>{playerStats.name}</td>
+                  <td className='player-name'>{playerStats.name} {playerStats.team ? `[${playerStats.team}]` : ''}</td>
                   <td className='stats-results'>{playerStats.wins}</td>
                   <td className='stats-results'>{playerStats.winrate}%</td>
                   <td className='stats-results'>{playerStats.kills}</td>
                   <td className='stats-results'>{playerStats.deaths}</td>
                   <td className='stats-results'>{playerStats.kdr.toFixed(1)}</td>
-                  <td className='stats-results'>{playerStats.cargo}</td>
                   <td className='stats-results'>{playerStats.ammo}</td>
                   <td className='stats-results'>{playerStats.turns}</td>
                   <td className='stats-results'>{playerStats.actions.move}</td>

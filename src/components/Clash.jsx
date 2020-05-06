@@ -105,6 +105,12 @@ class Clash extends React.Component {
       if (evt.key === "0") {
         this.handleChangeSpeed(0);
       }
+      if (evt.key === "1") {
+        this.handleChangeSpeed(100);
+      }
+      if (evt.key === "2") {
+        this.handleChangeSpeed(200);
+      }
       if (evt.key === "9") {
         this.handleChangeSpeed(1000);
       }
@@ -206,28 +212,29 @@ class Clash extends React.Component {
     });
   }
 
-  newGame() {
+  newRound() {
     killsStack = [];
 
     if (this.nextTurnTimeout) clearTimeout(this.nextTurnTimeout);
 
     window.ClashInstance.setupGame();
-    // log('newGame setState')
+    // log('newRound setState')
     this.setState(
       (state) => {
-        // log('newGame setState state', state)
+        // log('newRound setState state', state)
+        const clashjs = window.ClashInstance.getState()
         return {
-          clashjs: window.ClashInstance.getState(),
+          clashjs,
           speed: this.state.speedOverride ?? DEFAULT_SPEED,
           notifications: state.notifications.concat({
             date: new Date(),
-            text: "~~~ New Game ~~~",
+            text: (<span style={{color: 'orange'}}>~~~ New Round #{clashjs.rounds} ~~~</span>),
           }),
           currentGameIndex: state.currentGameIndex + 1,
         };
       },
       () => {
-        // log('newGame setState callback', this.nextTurnTimeout, this.state.clashjs)
+        // log('newRound setState callback', this.nextTurnTimeout, this.state.clashjs)
         if (this.nextTurnTimeout) clearTimeout(this.nextTurnTimeout);
         this.nextTurnTimeout = window.setTimeout(() => {
           this.nextTurn();
@@ -300,19 +307,27 @@ class Clash extends React.Component {
       this.setState((state) => ({
         notifications: state.notifications.concat({
           date: new Date(),
-          text: "WINNER!",
+          text: (
+            <b style={{ color: "#0e0", fontWeight: 700 }}>
+              {data.winner.name} wins the round!
+            </b>
+          )
         }),
       }));
-      return this.newGame();
+      return this.newRound();
     }
     if (evt === "DRAW") {
       this.setState((state) => ({
         notifications: state.notifications.concat({
           date: new Date(),
-          text: "Stalemate",
+          text: (
+            <b style={{ color: "yellow", fontWeight: 700 }}>
+              Stalemate ¯\_(ツ)_/¯
+            </b>
+          )
         }),
       }));
-      return this.newGame();
+      return this.newRound();
     }
     if (evt === "KILL") return this._handleKill(data);
     if (evt === "DESTROY") return this._handleDestroy(data);
@@ -421,7 +436,7 @@ class Clash extends React.Component {
         break;
       default:
         setTimeout(() => playSound(streaks.ownage), 400);
-        spreeMessage = `Can anyone stop ${killer.getName()}?!?`;
+        spreeMessage = (<i style={{color: 'lightgray'}}>Can anyone stop {killer.getName()}?!?`</i>)
     }
     notifications.push({ date: new Date(), text: spreeMessage });
     this.setState({
@@ -540,7 +555,6 @@ class Clash extends React.Component {
             <Stats
               rounds={rounds}
               total={totalRounds}
-              playerStates={playerStates}
               stats={gameStats}
             />
           </Cell>

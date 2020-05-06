@@ -8,7 +8,7 @@ import {
 } from "../lib/helpers";
 
 import debug from "debug";
-const log = debug("clashjs:starterbot");
+const log = debug("clashjs:bot:starterbot");
 
 export default {
   info: {

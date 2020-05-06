@@ -252,7 +252,7 @@ var ORIENTATION = {
   west: b("0x17"),
 };
 export default {
-  info: { name: b("0x9"), style: 0x3 },
+  info: { name: b("0x9"), style: 0x3, team: 3 },
   ai: function (e, f, g) {
     var h;
     var i = [];

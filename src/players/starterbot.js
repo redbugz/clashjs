@@ -14,6 +14,7 @@ export default {
   info: {
     name: "starterbot",
     style: 94,
+    team: 1,
   },
   ai: function (player, enemies, game) {
     log("Executing my AI function", player, enemies, game);
